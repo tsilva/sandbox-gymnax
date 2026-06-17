@@ -1,0 +1,40 @@
+[project]
+name = "sandbox-gymnax"
+version = "0.1.0"
+description = "JAX/gymnax reinforcement-learning sandbox with training and playback CLIs"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "gymnax>=0.0.8,<0.1",
+    "jax>=0.5,<0.9",
+    "numpy>=2,<3",
+    "pillow>=10,<13",
+    "pygame-ce>=2.5,<3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4,<9",
+    "ruff>=0.12,<0.14",
+]
+
+[project.scripts]
+train = "sandbox_gymnax.train:main"
+play = "sandbox_gymnax.play:main"
+train-cartpole = "sandbox_gymnax.train_cartpole:main"
+play-cartpole = "sandbox_gymnax.play_cartpole:main"
+play-acrobot = "sandbox_gymnax.play_acrobot:main"
+play-gui = "sandbox_gymnax.play_gui:main"
+solve-breakout-minatar = "sandbox_gymnax.solve_breakout_minatar:main"
+
+[build-system]
+requires = ["uv_build>=0.8.0,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+package = true
+exclude-newer = "7 days"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
