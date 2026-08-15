@@ -28,7 +28,7 @@ play-gui = "sandbox_gymnax.play_gui:main"
 solve-breakout-minatar = "sandbox_gymnax.solve_breakout_minatar:main"
 
 [build-system]
-requires = ["uv_build>=0.8.0,<0.12.0"]
+requires = ["uv_build>=0.12.3,<0.13.0"]
 build-backend = "uv_build"
 
 [tool.uv]
