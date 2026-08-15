@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  merge_group:
+    types:
+      - checks_requested
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Python security and RL regression gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      JAX_PLATFORMS: cpu
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.2.0
+        with:
+          python-version: "3.13"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          version: 0.11.13
+          cache: true
+
+      - name: Install locked dependencies
+        run: uv sync --frozen --group dev
+
+      - name: Audit locked dependencies
+        run: uv audit
+
+      - name: Reject non-registry dependency sources
+        run: |
+          if grep -En 'source = \{ (git|url|path|directory|editable) =' uv.lock \
+            | grep -vF 'source = { editable = "." }'; then
+            echo "Non-registry dependency source found in uv.lock" >&2
+            exit 1
+          fi
+
+      - name: Lint
+        run: uv run --frozen ruff check .
+
+      - name: Test security boundaries and RL behavior
+        run: uv run --frozen pytest -q
+
+      - name: Build package
+        run: uv build
+
+      - name: Smoke-test CLI
+        run: uv run --frozen train --help
