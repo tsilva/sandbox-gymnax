@@ -1,4 +1,8 @@
-# sandbox-gymnax
+<p align="center">
+  <!-- repo-tagline:start -->
+  <strong>🎮 Train reinforcement learning agents with gymnax and JAX ⚡</strong>
+  <!-- repo-tagline:end -->
+</p>
 
 Small `gymnax` reinforcement-learning sandbox using JAX.
 
