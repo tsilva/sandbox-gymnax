@@ -15,9 +15,9 @@ from PIL import Image
 
 from sandbox_gymnax.play_acrobot import draw_frame as draw_acrobot_frame
 from sandbox_gymnax.play_cartpole import draw_frame as draw_cartpole_frame
-from sandbox_gymnax.solve_breakout_minatar import expert_actions, render_frame as draw_breakout_frame
+from sandbox_gymnax.solve_breakout_minatar import expert_actions
+from sandbox_gymnax.solve_breakout_minatar import render_frame as draw_breakout_frame
 from sandbox_gymnax.train import policy_logits
-
 
 PyTree = Any
 

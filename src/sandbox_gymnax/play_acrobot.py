@@ -13,7 +13,6 @@ from PIL import Image, ImageDraw
 
 from sandbox_gymnax.train import policy_logits
 
-
 PyTree = Any
 
 
