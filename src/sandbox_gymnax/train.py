@@ -12,7 +12,6 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
-
 PyTree = Any
 
 
@@ -68,14 +67,14 @@ def available_env_ids() -> list[str]:
 
 def print_available_envs() -> None:
     print("Specify an environment with --env-id.", flush=True)
-    print("", flush=True)
+    print(flush=True)
     print("Available gymnax env ids:", flush=True)
     for env_id in available_env_ids():
         print(f"  {env_id}", flush=True)
-    print("", flush=True)
+    print(flush=True)
     print("Example:", flush=True)
     print("  uv run train --env-id CartPole-v1", flush=True)
-    print("", flush=True)
+    print(flush=True)
     print("Known solved thresholds over 100 eval episodes:", flush=True)
     for env_id, threshold in SOLVED_THRESHOLDS.items():
         print(f"  {env_id}: mean_return >= {threshold:g}", flush=True)

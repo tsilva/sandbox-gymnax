@@ -19,7 +19,6 @@ from sandbox_gymnax.play_gui import reset_frames_dir, save_frame, write_player_h
 from sandbox_gymnax.solve_breakout_minatar import render_frame as draw_breakout_frame
 from sandbox_gymnax.train import policy_logits
 
-
 PyTree = Any
 
 

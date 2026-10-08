@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sys
 
-from sandbox_gymnax.train import *  # noqa: F403
+from sandbox_gymnax.train import *
 from sandbox_gymnax.train import main as train_main
 
 
