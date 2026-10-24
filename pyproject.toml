@@ -8,7 +8,7 @@ dependencies = [
     "gymnax>=0.0.8,<0.1",
     "jax>=0.10.2,<0.11",
     "numpy>=2,<3",
-    "pillow>=12.3,<13",
+    "pillow>=12.3,<14",
     "pygame-ce>=2.5.8,<3",
 ]
 
