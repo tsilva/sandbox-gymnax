@@ -5,7 +5,7 @@ description = "JAX/gymnax reinforcement-learning sandbox with training and playb
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [
-    "gymnax>=0.0.8,<0.1",
+    "gymnax>=0.0.8,<1.1",
     "jax>=0.10.2,<0.11",
     "numpy>=2,<3",
     "pillow>=13.0.0,<14",
