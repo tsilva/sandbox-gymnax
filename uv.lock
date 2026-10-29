@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11, <3.14"
 resolution-markers = [
     "python_full_version >= '3.13' and sys_platform == 'win32'",
@@ -16,19 +16,6 @@ resolution-markers = [
 [options]
 exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for backwards compatibility when using relative exclude-newer values.
 exclude-newer-span = "P7D"
-
-[options.exclude-newer-package]
-mlflow-skinny = "2026-10-21T02:08:46Z"
-env-vizdoom-turbo = false
-mlflow-tracing = "2026-10-21T02:08:46Z"
-env-breakoutatari2600-turbo-native = false
-env-gradoom-turbo-torch = false
-env-supermariobrosnes-turbo-emu = false
-unsloth-zoo = false
-mlflow = "2026-10-21T02:08:46Z"
-env-stableretro-turbo = false
-unsloth = false
-gradlab = false
 
 [manifest]
 constraints = [
@@ -267,7 +254,7 @@ wheels = [
 
 [[package]]
 name = "gymnax"
-version = "0.0.9"
+version = "1.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "flax" },
@@ -276,9 +263,9 @@ dependencies = [
     { name = "matplotlib" },
     { name = "seaborn" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9c/2c/91105387a5f6f11fe4c6e773fecd6aeac5a04656f1ea03c28e5228a8a11c/gymnax-0.0.9.tar.gz", hash = "sha256:407ececbefb527b8e18d2bc4df15dd5251fd3507f3f527ad69fbfc7b2d8ae410", size = 57128, upload-time = "2025-05-23T08:53:19.987Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/a1/a9648bc16a86306d22de219ac1fd2104edfd1dc6737c148f50c9a0e78de8/gymnax-1.0.1.tar.gz", hash = "sha256:f56d50e4be2f8827db6e548387bc8806d69785b637ca005c19ea95685eaacdbb", size = 80720, upload-time = "2026-10-18T10:15:02.801Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fd/04/1042695a9aee9d619d4802272ffeb7ab88f4c241d16c2701f666ec7e529b/gymnax-0.0.9-py3-none-any.whl", hash = "sha256:a73359cfbc2664f4963ccac06afe2b46ff7825cf48dd97200b0f4025f6f995bc", size = 86567, upload-time = "2025-05-23T08:53:18.316Z" },
+    { url = "https://files.pythonhosted.org/packages/76/5a/03a25cf0d879ed8fce040c49f38572d0e467c116da612ef5daf60e7a8b98/gymnax-1.0.1-py3-none-any.whl", hash = "sha256:b7adcda33f41f6b8b27ac589be378a154a9209e736147977f6c0aebe5f35e796", size = 101241, upload-time = "2026-10-18T10:15:01.4Z" },
 ]
 
 [[package]]
@@ -1112,7 +1099,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "gymnax", specifier = ">=0.0.8,<0.1" },
+    { name = "gymnax", specifier = ">=0.0.8,<1.1" },
     { name = "jax", specifier = ">=0.10.2,<0.11" },
     { name = "numpy", specifier = ">=2,<3" },
     { name = "pillow", specifier = ">=13.0.0,<14" },
@@ -1135,7 +1122,7 @@ resolution-markers = [
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" } },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/7a/97/5a3609c4f8d58b039179648e62dd220f89864f56f7357f5d4f45c29eb2cc/scipy-1.17.1.tar.gz", hash = "sha256:95d8e012d8cb8816c226aef832200b1d45109ed4464303e997c5b13122b297c0", size = 30573822, upload-time = "2026-02-23T00:26:24.851Z" }
 wheels = [
@@ -1194,7 +1181,7 @@ resolution-markers = [
     "python_full_version == '3.12.*' and sys_platform != 'emscripten' and sys_platform != 'win32'",
 ]
 dependencies = [
-    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" } },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a7/25/c2700dfaf6442b4effaa91af24ebce5dc9d31bb4a69706313aae70d72cd0/scipy-1.18.0.tar.gz", hash = "sha256:67b2ad2ad54c72ca6d04975a9b2df8c3638c34ddd5b28738e94fc2b57929d378", size = 30774447, upload-time = "2026-06-19T15:01:43.456Z" }
 wheels = [
