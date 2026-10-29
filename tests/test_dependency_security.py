@@ -20,8 +20,8 @@ def _version_tuple(distribution: str) -> tuple[int, ...]:
 
 
 def test_locked_packages_are_outside_vulnerable_ranges() -> None:
-    assert _version_tuple("Pillow") >= (12, 3, 0)
-    assert _version_tuple("msgpack") >= (1, 2, 1)
+    assert _version_tuple("Pillow") >= (13, 0, 0)
+    assert _version_tuple("msgpack") >= (1, 2, 3)
     assert _version_tuple("pytest") >= (9, 0, 3)
 
 

@@ -18,6 +18,8 @@ For development tools:
 uv sync --group dev
 ```
 
+The committed lock uses patched Pillow and MessagePack versions while retaining the seven-day release hold. Validate an update with `uv sync --frozen --group dev`, `uv audit`, `uv run --frozen ruff check .`, and `JAX_PLATFORMS=cpu uv run --frozen pytest -q`.
+
 ## Train
 
 List available environments:
