@@ -45,9 +45,11 @@ def rollout_policy(
         action = greedy_action(params, obs)
         actions.append(action)
         key, step_key = jax.random.split(key)
-        obs, env_state, reward, done_value, _ = env.step(step_key, env_state, action, env_params)
+        obs, env_state, reward, terminated, truncated, _ = env.step(
+            step_key, env_state, action, env_params
+        )
         rewards.append(float(np.asarray(reward)))
-        done = bool(np.asarray(done_value))
+        done = bool(np.asarray(terminated | truncated))
         if done:
             return states, actions, rewards, float(np.sum(rewards)), step + 1, done
 

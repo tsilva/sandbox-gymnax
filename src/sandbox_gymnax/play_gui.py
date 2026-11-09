@@ -72,9 +72,11 @@ def rollout_cartpole(params: PyTree, seed: int, max_steps: int, frames_dir: Path
         action = greedy_policy_action(params, obs)
         image = draw_cartpole_frame(env_state, env_params, total_return, step)
         key, step_key = jax.random.split(key)
-        obs, env_state, reward, done_value, _ = env.step(step_key, env_state, action, env_params)
+        obs, env_state, reward, terminated, truncated, _ = env.step(
+            step_key, env_state, action, env_params
+        )
         total_return += float(np.asarray(reward))
-        done = bool(np.asarray(done_value))
+        done = bool(np.asarray(terminated | truncated))
         frames.append(
             {
                 "src": save_frame(image, frames_dir, step - 1),
@@ -100,14 +102,14 @@ def rollout_acrobot(params: PyTree, seed: int, max_steps: int, frames_dir: Path)
     for step in range(1, max_steps + 1):
         action = greedy_policy_action(params, obs)
         key, step_key = jax.random.split(key)
-        next_obs, next_env_state, reward, done_value, _ = env.step(
+        next_obs, next_env_state, reward, terminated, truncated, _ = env.step(
             step_key,
             env_state,
             action,
             env_params,
         )
         total_return += float(np.asarray(reward))
-        done = bool(np.asarray(done_value))
+        done = bool(np.asarray(terminated | truncated))
         image = draw_acrobot_frame(env_state, env_params, action, total_return, step, done)
         frames.append(
             {
@@ -137,9 +139,11 @@ def rollout_breakout(seed: int, max_steps: int, frames_dir: Path) -> list[dict[s
         action = breakout_expert_action(obs)
         image = draw_breakout_frame(np.asarray(obs), step, total_return)
         key, step_key = jax.random.split(key)
-        obs, env_state, reward, done_value, _ = env.step(step_key, env_state, action, env_params)
+        obs, env_state, reward, terminated, truncated, _ = env.step(
+            step_key, env_state, action, env_params
+        )
         total_return += float(np.asarray(reward))
-        done = bool(np.asarray(done_value))
+        done = bool(np.asarray(terminated | truncated))
         frames.append(
             {
                 "src": save_frame(image, frames_dir, step - 1),

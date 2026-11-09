@@ -178,14 +178,14 @@ def rollout_checkpoint(
     for step in range(1, max_steps + 1):
         action = greedy_action(checkpoint, obs)
         key, step_key = jax.random.split(key)
-        next_obs, next_env_state, reward, done_value, _ = env.step(
+        next_obs, next_env_state, reward, terminated, truncated, _ = env.step(
             step_key,
             env_state,
             action,
             env_params,
         )
         cumulative_return += float(np.asarray(reward))
-        done = bool(np.asarray(done_value))
+        done = bool(np.asarray(terminated | truncated))
         image = draw_frame(
             env_id,
             obs,

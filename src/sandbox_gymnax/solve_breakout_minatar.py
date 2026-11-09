@@ -48,12 +48,13 @@ def make_evaluator(eval_episodes: int, max_steps: int):
             actions = expert_actions(carry["obs"])
             key, step_key = jax.random.split(carry["key"])
             step_keys = jax.random.split(step_key, eval_episodes)
-            next_obs, next_env_state, rewards, dones, _ = step_env(
+            next_obs, next_env_state, rewards, terminated, truncated, _ = step_env(
                 step_keys,
                 carry["env_state"],
                 actions,
                 env_params,
             )
+            dones = terminated | truncated
             active = jnp.logical_not(carry["done"])
             returns = carry["returns"] + jnp.where(active, rewards, 0.0)
             lengths = carry["lengths"] + active.astype(jnp.float32)
@@ -132,9 +133,11 @@ def render_rollout(seed: int, max_steps: int, output_path: Path) -> dict[str, fl
         frames.append(render_frame(np.asarray(obs), step, total_return))
         action = int(np.asarray(expert_actions(obs[None, ...]))[0])
         key, step_key = jax.random.split(key)
-        obs, env_state, reward, done_value, _ = env.step(step_key, env_state, action, env_params)
+        obs, env_state, reward, terminated, truncated, _ = env.step(
+            step_key, env_state, action, env_params
+        )
         total_return += float(np.asarray(reward))
-        done = bool(np.asarray(done_value))
+        done = bool(np.asarray(terminated | truncated))
         if done:
             frames.append(render_frame(np.asarray(obs), step + 1, total_return))
             break

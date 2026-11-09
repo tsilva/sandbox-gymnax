@@ -46,9 +46,11 @@ def rollout_policy(
         state_seq.append(env_state)
         key, step_key = jax.random.split(key)
         action = greedy_action(params, obs)
-        obs, env_state, reward, done, _ = env.step(step_key, env_state, action, env_params)
+        obs, env_state, reward, terminated, truncated, _ = env.step(
+            step_key, env_state, action, env_params
+        )
         rewards.append(float(reward))
-        if bool(done):
+        if bool(terminated | truncated):
             return state_seq, rewards, float(np.sum(rewards)), step + 1
 
     return state_seq, rewards, float(np.sum(rewards)), max_steps

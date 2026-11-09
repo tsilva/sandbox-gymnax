@@ -64,13 +64,13 @@ def test_jax_policy_forward_backward_and_gymnax_step() -> None:
 
     env, env_params = gymnax.make("CartPole-v1")
     observation, state = env.reset(jax.random.key(1), env_params)
-    next_observation, _, reward, done, _ = env.step(
+    next_observation, _, reward, terminated, truncated, _ = env.step(
         jax.random.key(2), state, jnp.array(0), env_params
     )
     assert observation.shape == (4,)
     assert next_observation.shape == (4,)
     assert jnp.isfinite(reward)
-    assert done.shape == ()
+    assert terminated.shape == truncated.shape == ()
 
 
 def test_breakout_expert_moves_toward_ball() -> None:
