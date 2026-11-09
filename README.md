@@ -103,3 +103,7 @@ uv run play-cartpole
 uv run play-acrobot
 uv run play-gui --game cartpole --open
 ```
+
+## License
+
+[MIT License](LICENSE).
