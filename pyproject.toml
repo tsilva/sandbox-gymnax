@@ -5,7 +5,7 @@ description = "JAX/gymnax reinforcement-learning sandbox with training and playb
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [
-    "gymnax>=0.0.8,<0.1",
+    "gymnax>=1.0.1,<1.1",
     "jax>=0.10.2,<0.11",
     "numpy>=2,<3",
     "pillow>=13.0.0,<14",
@@ -15,7 +15,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=9.0.3,<10",
-    "ruff>=0.16.2,<0.17",
+    "ruff>=0.16.2,<0.18",
 ]
 
 [project.scripts]
@@ -28,7 +28,7 @@ play-gui = "sandbox_gymnax.play_gui:main"
 solve-breakout-minatar = "sandbox_gymnax.solve_breakout_minatar:main"
 
 [build-system]
-requires = ["uv_build>=0.12.3,<0.13.0"]
+requires = ["uv_build>=0.12.3,<0.14.0"]
 build-backend = "uv_build"
 
 [tool.uv]

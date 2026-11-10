@@ -319,12 +319,13 @@ def make_update(config: TrainConfig, env: Any, env_params: Any):
             values = value_prediction(params, obs)
             actions, log_probs, entropy = sample_actions(action_key, logits)
             step_keys = jax.random.split(step_key, config.num_envs)
-            next_obs, next_env_state, rewards, dones, _ = step_env(
+            next_obs, next_env_state, rewards, terminated, truncated, _ = step_env(
                 step_keys,
                 env_state,
                 actions,
                 env_params,
             )
+            dones = terminated | truncated
             next_carry = {
                 "params": params,
                 "opt_state": carry["opt_state"],
@@ -421,12 +422,13 @@ def make_evaluator(env: Any, env_params: Any, eval_episodes: int, max_steps: int
             actions = jnp.argmax(logits, axis=-1)
             key, step_key = jax.random.split(carry["key"])
             step_keys = jax.random.split(step_key, eval_episodes)
-            next_obs, next_env_state, rewards, dones, _ = step_env(
+            next_obs, next_env_state, rewards, terminated, truncated, _ = step_env(
                 step_keys,
                 carry["env_state"],
                 actions,
                 env_params,
             )
+            dones = terminated | truncated
             active = jnp.logical_not(carry["done"])
             returns = carry["returns"] + jnp.where(active, rewards, 0.0)
             lengths = carry["lengths"] + active.astype(jnp.float32)
